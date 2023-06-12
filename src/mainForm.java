@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,11 +31,13 @@ public class mainForm extends JFrame {
     private JButton buscarButton;
     private JTextField textBuscarPlatoOrden;
 
+    Menu m =  new Menu();
+
     public mainForm() {
 
         ingresarPlatoButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { crearPlato();
 
             }
         });
@@ -52,7 +55,7 @@ public class mainForm extends JFrame {
         });
         modificarModifButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { modificar();
 
             }
         });
@@ -92,5 +95,19 @@ public class mainForm extends JFrame {
     //Get mainPanel
     public JPanel getMainPanel() {
         return mainPanel;
+    }
+
+    private void crearPlato(){
+        Plato pt = new Plato(textIngresoNombre.getText(), Double.parseDouble(textIngresoPrecio.getText()), Integer.parseInt(textIngresoCalorias.getText()), Integer.parseInt(textIngresoPreparacion.getText()));
+        JOptionPane.showMessageDialog(null, "El plato" + pt + "ha sido agregado");
+    }
+
+    public void modificar () {
+        if (emp.modificar(textoModifNombre.getText(), Double.parseDouble(textoModifPrecio.getText()), Integer.parseInt(textoModifCalorias.getText()), Integer.parseInt(textoModifPreparacion.getText()))) {
+            JOptionPane.showMessageDialog(null, "Plato agregado");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El plato no ha sido agregado");
+        }
     }
 }
